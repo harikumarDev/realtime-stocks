@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
-import { STOCKS } from "@/utils/helper";
+import { STOCKS } from "@/utils/helpers";
 import db from "@/utils/db";
 import Stock from "@/models/stock";
 

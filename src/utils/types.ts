@@ -18,3 +18,12 @@ export interface StockState {
   selectedStock: string;
   stockData: Record<string, Stock[]>;
 }
+
+export interface StockTableProps {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ModalProps {
+  showModal?: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}

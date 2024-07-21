@@ -1,12 +1,12 @@
 "use client";
-
-import React, { ChangeEvent, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useAppSelector, useAppDispatch } from "@/store";
-import { setStockData, setSelectedStock } from "@/store/stockSlice";
-import { formatDate, stockNames, STOCKS } from "@/utils/helper";
+import { setStockData } from "@/store/stockSlice";
+import { formatDate, stockNames } from "@/utils/helpers";
+import { StockTableProps } from "@/utils/types";
 
-function StockTable() {
+function StockTable({ setShowModal }: StockTableProps) {
   const dispatch = useAppDispatch();
   const { selectedStock, stockData } = useAppSelector((state) => state.stock);
 
@@ -18,13 +18,9 @@ function StockTable() {
 
   useEffect(() => {
     fetchData();
-    const intervalId = setInterval(fetchData, 5000);
+    const intervalId = setInterval(fetchData, 6000);
     return () => clearInterval(intervalId);
   }, []);
-
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setSelectedStock(e.target.value));
-  };
 
   return (
     <div className="flex flex-col items-center w-full mt-8">
@@ -38,18 +34,27 @@ function StockTable() {
               <p className="text-gray-500 mt-0.5">{selectedStock}</p>
             </div>
             <div>
-              <select
-                name="stock"
-                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-2 outline-none"
-                value={selectedStock}
-                onChange={handleChange}
+              <button
+                className="text-white bg-blue-600 hover:bg-blue-700 hover:shadow-md transition-all duration-200 rounded-md text-sm px-2 py-1.5 focus:outline-none flex items-center"
+                onClick={() => setShowModal(true)}
               >
-                {STOCKS.map((stock) => (
-                  <option key={stock.symbol} value={stock.symbol}>
-                    {stock.name}
-                  </option>
-                ))}
-              </select>
+                Change Stock
+                <svg
+                  className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
