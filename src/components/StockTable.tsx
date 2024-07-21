@@ -61,6 +61,7 @@ function StockTable({ setShowModal }: StockTableProps) {
         <table className="border-collapse">
           <thead className="text-base">
             <tr>
+              <th>S. No.</th>
               <th>Current Price ($)</th>
               <th>Change</th>
               <th>Time</th>
@@ -74,6 +75,7 @@ function StockTable({ setShowModal }: StockTableProps) {
           <tbody className="text-sm">
             {stockData[selectedStock]?.map((item, index) => (
               <tr key={index}>
+                <td>{index + 1}</td>
                 <td>{item.price.toString()}</td>
                 <td
                   className={`${

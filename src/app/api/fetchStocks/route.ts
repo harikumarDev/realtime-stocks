@@ -4,6 +4,8 @@ import { STOCKS } from "@/utils/helpers";
 import db from "@/utils/db";
 import Stock from "@/models/stock";
 
+export const dynamic = 'force-dynamic';
+
 const API_KEY = process.env.FINNHUB_APIKEY;
 
 export async function GET() {
